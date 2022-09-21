@@ -47,19 +47,19 @@ const sneakersSchema = new Schema(
       },
       image3: {
         type: String,
-        required: true,
+        required: false,
       },
       imageThumbnail3: {
         type: String,
-        required: true,
+        required: false,
       },
       image4: {
         type: String,
-        required: true,
+        required: false,
       },
       imageThumbnail4: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   },
