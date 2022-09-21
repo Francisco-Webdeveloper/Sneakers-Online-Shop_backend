@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use(sneakerRoutes);
+app.use("/sneakers", sneakerRoutes);
 
 // listen for requests
 app.listen(process.env.PORT, () => {
