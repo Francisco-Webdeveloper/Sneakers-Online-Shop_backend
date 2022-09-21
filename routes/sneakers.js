@@ -1,12 +1,13 @@
 const express = require("express");
-const { createSneakers } = require("../controllers/sneakersController");
+const {
+  getSneakers,
+  createSneakers,
+} = require("../controllers/sneakersController");
 
 // instance of the router
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ msg: "GET all sneakers!" });
-});
+router.get("/", getSneakers);
 
 router.get("/:id", (req, res) => {
   res.json({ msg: "GET a single pair of sneaker!" });

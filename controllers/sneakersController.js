@@ -1,6 +1,11 @@
 const Sneakers = require("../models/sneakersModel");
 
 // get all sneakers
+const getSneakers = async (req, res) => {
+  const sneakers = await Sneakers.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(sneakers);
+};
 
 // get a single pair of sneakers
 
@@ -48,4 +53,4 @@ const createSneakers = async (req, res) => {
 
 // update a pair of sneakers
 
-module.exports = { createSneakers };
+module.exports = { getSneakers, createSneakers };
