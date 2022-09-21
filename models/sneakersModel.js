@@ -66,4 +66,4 @@ const sneakersSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Sneakers", sneakersSchema);
+module.exports = mongoose.model("Sneaker", sneakersSchema);
