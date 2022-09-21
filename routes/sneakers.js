@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getSneakers,
   createSneakers,
-} = require("../controllers/sneakersController");
+} = require("../controllers/sneakerController");
 
 // instance of the router
 const router = express.Router();

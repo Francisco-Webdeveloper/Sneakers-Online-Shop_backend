@@ -1,4 +1,4 @@
-const Sneakers = require("../models/sneakersModel");
+const Sneakers = require("../models/sneakerModel");
 
 // get all sneakers
 const getSneakers = async (req, res) => {
