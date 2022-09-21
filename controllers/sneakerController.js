@@ -12,7 +12,7 @@ const getSneakers = async (req, res) => {
 const getSneaker = async (req, res) => {
   const { id } = req.params;
 
-  // check if id is valid according to mongoDb
+  // check if 'id' is valid according to mongoDb
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such sneaker" });
   }
@@ -25,7 +25,7 @@ const getSneaker = async (req, res) => {
 };
 
 // create a new pair of sneakers
-const createSneakers = async (req, res) => {
+const createSneaker = async (req, res) => {
   const { brand, name, description, price, discountPrice, stock } = req.body;
   const {
     image1,
@@ -65,7 +65,42 @@ const createSneakers = async (req, res) => {
 };
 
 // delete a pair of sneakers
+const deleteSneaker = async (req, res) => {
+  const { id } = req.params;
+
+  // check if 'id' is valid according to mongoDb
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such sneaker" });
+  }
+
+  const sneaker = await Sneakers.findOneAndDelete({ _id: id });
+
+  if (!sneaker) {
+    return res.status(400).json({ error: "no such sneaker" });
+  }
+  res.status(200).json(sneaker);
+};
 
 // update a pair of sneakers
+const updateSneaker = async (req, res) => {
+  const { id } = req.params;
 
-module.exports = { getSneakers, getSneaker, createSneakers };
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such sneaker" });
+  }
+
+  const sneaker = await Sneakers.findOneAndUpdate({ _id: id }, { ...req.body });
+
+  if (!sneaker) {
+    return res.status(400).json({ error: "no such sneaker" });
+  }
+  res.status(200).json(sneaker);
+};
+
+module.exports = {
+  getSneakers,
+  getSneaker,
+  createSneaker,
+  deleteSneaker,
+  updateSneaker,
+};

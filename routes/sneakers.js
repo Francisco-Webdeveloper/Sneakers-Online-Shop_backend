@@ -2,24 +2,23 @@ const express = require("express");
 const {
   getSneakers,
   getSneaker,
-  createSneakers,
+  createSneaker,
+  deleteSneaker,
+  updateSneaker,
 } = require("../controllers/sneakerController");
 
 // instance of the router
 const router = express.Router();
 
+// routes
 router.get("/", getSneakers);
 
 router.get("/:id", getSneaker);
 
-router.post("/", createSneakers);
+router.post("/", createSneaker);
 
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "DELETE a pair of sneaker!" });
-});
+router.delete("/:id", deleteSneaker);
 
-router.patch("/:id", (req, res) => {
-  res.json({ msg: "UPDATE a pair of sneaker!" });
-});
+router.patch("/:id", updateSneaker);
 
 module.exports = router;
