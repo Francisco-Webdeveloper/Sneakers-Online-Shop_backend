@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getSneakers,
+  getSneaker,
   createSneakers,
 } = require("../controllers/sneakerController");
 
@@ -9,9 +10,7 @@ const router = express.Router();
 
 router.get("/", getSneakers);
 
-router.get("/:id", (req, res) => {
-  res.json({ msg: "GET a single pair of sneaker!" });
-});
+router.get("/:id", getSneaker);
 
 router.post("/", createSneakers);
 

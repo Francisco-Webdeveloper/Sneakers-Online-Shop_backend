@@ -1,4 +1,5 @@
 const Sneakers = require("../models/sneakerModel");
+const mongoose = require("mongoose");
 
 // get all sneakers
 const getSneakers = async (req, res) => {
@@ -8,6 +9,20 @@ const getSneakers = async (req, res) => {
 };
 
 // get a single pair of sneakers
+const getSneaker = async (req, res) => {
+  const { id } = req.params;
+
+  // check if id is valid according to mongoDb
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such sneaker" });
+  }
+
+  const sneaker = await Sneakers.findById(id);
+  if (!sneaker) {
+    return res.status(404).json({ error: "no such sneaker" });
+  }
+  res.status(200).json(sneaker);
+};
 
 // create a new pair of sneakers
 const createSneakers = async (req, res) => {
@@ -53,4 +68,4 @@ const createSneakers = async (req, res) => {
 
 // update a pair of sneakers
 
-module.exports = { getSneakers, createSneakers };
+module.exports = { getSneakers, getSneaker, createSneakers };
