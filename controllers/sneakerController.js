@@ -14,14 +14,18 @@ const getSneaker = async (req, res) => {
 
   // check if 'id' is valid according to mongoDb
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such sneaker" });
+    return res.status(400).json({ error: "No such sneaker" });
   }
 
-  const sneaker = await Sneakers.findById(id);
-  if (!sneaker) {
-    return res.status(404).json({ error: "no such sneaker" });
+  try {
+    const sneaker = await Sneakers.findById(id);
+    if (!sneaker) {
+      return res.status(404).json({ error: "no such sneaker" });
+    }
+    res.status(200).json(sneaker);
+  } catch (error) {
+    return res.status(500).json({ error: "Server error" });
   }
-  res.status(200).json(sneaker);
 };
 
 // create a new pair of sneakers
