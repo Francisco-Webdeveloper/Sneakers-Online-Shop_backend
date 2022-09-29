@@ -77,12 +77,16 @@ const deleteSneaker = async (req, res) => {
     return res.status(400).json({ error: "No such sneaker" });
   }
 
-  const sneaker = await Sneakers.findOneAndDelete({ _id: id });
+  try {
+    const sneaker = await Sneakers.findOneAndDelete({ _id: id });
 
-  if (!sneaker) {
-    return res.status(404).json({ error: "no such sneaker" });
+    if (!sneaker) {
+      return res.status(404).json({ error: "no such sneaker" });
+    }
+    res.status(200).json(sneaker);
+  } catch (error) {
+    return res.status(500).json({ error: "Server error" });
   }
-  res.status(200).json(sneaker);
 };
 
 // update a pair of sneakers
@@ -93,12 +97,19 @@ const updateSneaker = async (req, res) => {
     return res.status(400).json({ error: "No such sneaker" });
   }
 
-  const sneaker = await Sneakers.findOneAndUpdate({ _id: id }, { ...req.body });
+  try {
+    const sneaker = await Sneakers.findOneAndUpdate(
+      { _id: id },
+      { ...req.body }
+    );
 
-  if (!sneaker) {
-    return res.status(404).json({ error: "no such sneaker" });
+    if (!sneaker) {
+      return res.status(404).json({ error: "no such sneaker" });
+    }
+    res.status(200).json(sneaker);
+  } catch (error) {
+    return res.status(500).json({ error: "Server error" });
   }
-  res.status(200).json(sneaker);
 };
 
 module.exports = {
